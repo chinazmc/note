@@ -1,0 +1,3 @@
+# obsidian
+# ob
+# note
