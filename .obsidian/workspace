@@ -1,0 +1,141 @@
+{
+  "main": {
+    "id": "f0f47c351ce9940f",
+    "type": "split",
+    "children": [
+      {
+        "id": "1fba58d26344aa60",
+        "type": "leaf",
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "读书笔记/制内市场/全面市场化：1994年以来国家主导的市场改革.md",
+            "mode": "source",
+            "source": false
+          }
+        }
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "73607314f8453aee",
+    "type": "split",
+    "children": [
+      {
+        "id": "b06e48bed1c461ed",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "78d00a9da5039366",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {}
+            }
+          },
+          {
+            "id": "50f15684a3c7d9a6",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 381
+  },
+  "right": {
+    "id": "a4dd56a9bcb803f7",
+    "type": "split",
+    "children": [
+      {
+        "id": "c27b7fc8739aa21f",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "3cfa2143745a33c5",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "读书笔记/制内市场/全面市场化：1994年以来国家主导的市场改革.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "2d0993931120120f",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "e1b46d133e9448ba",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "读书笔记/制内市场/全面市场化：1994年以来国家主导的市场改革.md"
+              }
+            }
+          },
+          {
+            "id": "c7f826861dadd50a",
+            "type": "leaf",
+            "state": {
+              "type": "calendar",
+              "state": {}
+            }
+          },
+          {
+            "id": "96caa2843542a3c3",
+            "type": "leaf",
+            "state": {
+              "type": "review-queue-list-view",
+              "state": {}
+            }
+          }
+        ],
+        "currentTab": 3
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "active": "1fba58d26344aa60",
+  "lastOpenFiles": [
+    "读书笔记/制内市场/未命名.md",
+    "读书笔记/制内市场/第一章　市场、国家和资本主义：政治经济学理论与中国.md",
+    "读书笔记/制内市场/全面市场化：1994年以来国家主导的市场改革.md",
+    "算法/BFS.md",
+    "算法/动态规划_背包dp2.md",
+    "读书笔记/制内市场/导论.md",
+    "日志/2022-10-31_星期一.md",
+    "英文读书笔记/ted/ted生词本.md",
+    "英文读书笔记/ted/第105集 学会放手，你将变得势不可挡.pdf",
+    "技术/mq/kafka/十九、消费者组重平衡全流程解析.md"
+  ]
+}

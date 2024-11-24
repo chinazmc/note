@@ -1,0 +1,95 @@
+![](https://zhuanlan.zhihu.com/p/49206974) 
+
+# 前言
+
+前两周写过一篇[《基于Lucene查询原理分析Elasticsearch的性能》](https://zhuanlan.zhihu.com/p/47951652)，在最后留了一个彩蛋，说下一篇会介绍一种可以极大的优化查询性能的技术。本文就来介绍这种技术——IndexSorting。
+
+因为IndexSorting是在ES6.0之后才作为实验性的功能加入，相关的介绍资料还比较少，所以大部分人对它不够了解。另一方面是，想要理解它为什么能够优化性能、适合哪些场景、内部如何实现、有何副作用等，也需要花一翻功夫。所以本文专门对IndexSorting进行一个介绍，并分析它的作用、实现、适用场景等。如果你的场景能用上IndexSorting，那么它肯定会给你带来一个巨大的性能提升！
+
+# 什么是IndexSorting？
+
+# IndexSorting是ES的新功能
+
+在Elasticsearch中，IndexSorting是一个很新的功能，6.0版本才引入，并且标记这个功能是Beta版(6.5版本可能会去掉Beta标记)。
+
+在Lucene中，IndexSorting其实已经发展了一段时间。最早在10年，Lucene提供了一个IndexSorter的工具，作为一个离线工具可以对Index数据排序后生成一个新的Index。后来13年加入了SortingMergePolicy，在Segment进行merge的时候可以生成排好序的新Segment，在17年又加入了Sorting on flushed segment的功能，在Segment最初生成时就进行排序。另一方面是Lucene在查询时也做了很多优化，如果有IndexSorting，很多地方做了提前中断，后面会讲提前中断对查询性能的巨大作用。经过几次Lucene的改进和优化，IndexSorting这个功能也终于被集成进Elasticsearch。
+
+# IndexSorting是一种预排序
+
+与查询时的Sort不同，IndexSorting是一种预排序，即数据预先按照某种方式进行排序，它是Index的一个设置，不可更改。大家知道，Elasticsearch的底层是Lucene，Lucene中是以Segment为单位进行查询的，这里说的IndexSorting对数据进行预排序也是在每个Segment内有序的。
+
+一个Segment中的每个文档，都会被分配一个docID，docID从0开始，顺序分配。在没有IndexSorting时，docID是按照文档写入的顺序进行分配的，在设置了IndexSorting之后，docID的顺序就与IndexSorting的顺序一致。
+
+举个例子来说，假如文档中有一列为Timestamp，我们在IndexSorting中设置按照Timestamp逆序排序，那么在一个Segment内，docID越小，对应的文档的Timestamp越大，即按照Timestamp从大到小的顺序分配docID。
+
+# 为什么IndexSorting可以优化性能？
+
+# 提前中断
+
+IndexSorting能够优化性能，主要就是靠四个字，“提前中断”。但是提前中断是有条件的，需要查询的Sort顺序与IndexSorting的顺序相同，并且不需要获取符合条件的记录总数(TotalHits)。
+
+Lucene中的倒排链都是按照docID从小到大的顺序排列的，在进行组合条件查询时，也是按照docID从小到大的顺序选出符合条件的doc。那么当查询时的Sort顺序与IndexSorting的顺序相同时，会发生什么呢？
+
+比如查询时希望按照Timestamp降序排序后返回100条结果，在Lucene中进行查询时，发现docID对应的doc顺序也刚好是Timestamp降序排序的，那么查询到前100个符合条件的结果即可返回，这100个一定也是Timestamp最大的100个，这就做到了提前中断。
+
+提前中断可以极大的提升查询性能，特别是当一个查询条件命中的文档数量非常多的时候。在没有IndexSorting时，必须把所有符合条件的文档的docID扫描一遍，并且读取这些doc的一些字段来排序，选出符合条件的doc。有了IndexSorting之后，只需要选出前Top个doc即可，避免了全部扫描，性能甚至可以提升几个数量级。
+
+# IndexSorting提高了数据压缩率
+
+Lucene中使用了很多的压缩算法来对数据进行压缩，压缩一方面减少了磁盘使用量，另一方面也减少了查询时读取磁盘的数据量和IO次数等，对查询性能有很大帮助。
+
+Lucene中同时包括行存(Store)与列存(DocValues)的存储方式，但不管是行存还是列存，当应用IndexSorting后，相邻数据的相似度就会越高，也就越利于压缩。这不仅仅是体现在排序字段上，也体现在其他字段的相似度上。比如时序场景，当按照时间排序后，各个Metrics的值的近似度也会越大。所以IndexSorting可以提高数据的压缩率。
+
+# IndexSorting是否适合我的场景？
+
+# 由排序条件决定是否适合
+
+IndexSorting最大的作用就是优化查询性能，其适用的场景就是能够被其优化的场景，比如说：
+
+1.  查询时需要根据某列或者某几列排序后返回的场景：让IndexSorting顺序跟要查询的Sort顺序一致，让Lucene能够提前中断来提升性能。
+2.  不关心结果顺序的场景：也可以按照某列IndexSorting，查询时也设置按照这一列Sort即可。
+3.  有几种排序需求的场景：IndexSorting起码可以优化一种排序需求，其余的几种需求可以考虑是否多建几个索引，用空间换时间。
+
+也有些场景不能被其优化，比如根据文档相似度分数排序的场景，这时候很难进行预排序，因为相似分数是每次查询时才算出来的。
+
+# 根据查询原理看是否能优化
+
+上面提到Lucene会按照docID从小到大的顺序选出符合条件的doc，但是有时查询并不是慢在这个筛选过程，而是构造docID列表的过程，这时IndexSorting带来的优化效果会比较有限。
+
+因为Lucene的查询原理是比较复杂的，这里只列举两个例子：
+
+1.  对于字符串进行Range查询，且Range范围内有很多符合条件的Term的场景。这个场景下，查询可能会慢在两个地方，一个是Range范围内符合条件的Term非常多，扫描FST耗时很大，另一个如果这些Term对应的doc数很多，要构造BitSet也会非常耗时。因为利用IndexSorting的提前中断是发生在BitSet构造好之后，所以并不能优化到这个地方的性能。
+2.  对数字类型在BKD-Tree上进行范围查找时，因为BKD-Tree里的docID不是顺序排列的，所以并不像倒排链一样可以顺序读取。如果BKD-Tree上符合条件的docID很多，构造BitSet也很耗时，也不是IndexSorting能够优化到的。
+
+# 考虑对写入性能的影响
+
+IndexSorting优化的是查询性能，因为在写入时需要对数据进行排序，所以降低了写性能。如果写性能是目前的性能瓶颈，或者看重写性能要高于查询性能，那么不适合使用IndexSorting。
+
+# IndexSorting是如何实现的？
+
+本文介绍一下IndexSorting的实现细节，这也有助于大家理解它对写入性能产生的影响。IndexSorting可以保证在每个Segment中，数据都是按照设置的方式进行排序的，这要解决两个问题： 1. Lucene的Flush操作会生成Segment，这时候生成的Segment如何保证数据有序。 2. 多个Segment进行合并时如何保证有序。
+
+# 1. Flush时保证Segment内数据有序
+
+大家知道，数据写入Lucene后，并不是立即可查的，要生成Segment之后才能被查到。为了保证近实时的查询，ES会每隔一秒进行一次Refresh，Refresh就会调用到Lucene的Flush生成新的Segment。额外说的一点是，Lucene的Flush不同于ES的Flush，ES的Flush保证数据落盘，调用的是Lucene的commit，里面会调用fsync，这里的关系值得额外写一篇文章来说清楚。
+
+我们需要先知道Flush前数据是一个什么样的状态，才能知道Flush时如何对这些数据排序。每个doc写入进来之后，按照写入顺序被分配一个docID，然后被IndexingChain处理，依次要对invert index、store fields、doc values和point values进行处理，有些数据会直接写到文件里，主要是store field和term vector，其他的数据会放到memory buffer中。
+
+在Flush时，首先根据设定的列排序，这个排序可以利用内存中的doc values，排序之后得到老的docID到新docID的映射，因为之前docID是按照写入顺序生成的，现在重排后，生成的是新的排列。如果排序后与原来顺序完全一致，那么什么都不做，跟之前流程一样进行Flush。
+
+如果排序后顺序发生变化，如何排序呢？对于已经写到文件中的数据，比如store field和term vector，需要从文件中读出来，重新排列后再写到一个新文件里，原来的文件就相当于一个临时文件。对于内存中的数据结构，直接在内存中重排后写到文件中。
+
+相比没有IndexSorting时，对性能影响比较大的一块就是store field的重排，因为这部分需要从文件中读出再写回，而其他部分都是内存操作，性能影响稍小一些。这里我们也可以做一些思考，如果将store field和term vector这类数据也buffer在内存中，是否可以提升IndexSorting开启时的写入性能？
+
+# 2. Merge时保证新的Segment数据有序
+
+由于Flush时Segment已经是有序的了，所以在Merge时也就可以采用非常高效的Merge Sort的方式进行。
+
+# 总结
+
+IndexSorting是一种能够极大提高查询效率的技术，它通过预排序和提前中断大大减少了需要扫描的数据量，而且附带的优化是可以提高压缩率，减少存储空间。对于查询时需要按照某列排序的场景，它非常有用，但对于相关性分数排序的场景则无法通过预排序来优化。IndexSorting的缺点是对写入性能有影响，主要是体现在Segment的Flush和Merge阶段，对于非常看重写入性能的场景也不适合使用。总体上说，这是一项非常有用也很新的技术，相信它在Lucene和ES中的重要性会越来越强，也会有越来越多的业务场景受益于这个功能。
+
+# 参考文档
+https://zhuanlan.zhihu.com/p/49206974
+
+

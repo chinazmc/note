@@ -1,0 +1,219 @@
+{
+  "main": {
+    "id": "f0f47c351ce9940f",
+    "type": "split",
+    "children": [
+      {
+        "id": "f155b2bbe5dce2e0",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "d11a10d5cc842203",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "技术/mysql/分库分表/分库分表.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "a77a8e302b36a9f9",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "项目设计/多数据源索引同步设计.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ],
+        "currentTab": 1
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "73607314f8453aee",
+    "type": "split",
+    "children": [
+      {
+        "id": "b06e48bed1c461ed",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "78d00a9da5039366",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "50f15684a3c7d9a6",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "arch-transection-10.png",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "b0fe19061ad4c147",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 334.5,
+    "collapsed": true
+  },
+  "right": {
+    "id": "a4dd56a9bcb803f7",
+    "type": "split",
+    "children": [
+      {
+        "id": "c27b7fc8739aa21f",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "3cfa2143745a33c5",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "项目设计/多数据源索引同步设计.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "2d0993931120120f",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "e1b46d133e9448ba",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "项目设计/多数据源索引同步设计.md"
+              }
+            }
+          },
+          {
+            "id": "c7f826861dadd50a",
+            "type": "leaf",
+            "state": {
+              "type": "calendar",
+              "state": {}
+            }
+          },
+          {
+            "id": "96caa2843542a3c3",
+            "type": "leaf",
+            "state": {
+              "type": "review-queue-list-view",
+              "state": {}
+            }
+          }
+        ],
+        "currentTab": 3
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "canvas:新建白板": false,
+      "obsidian-spaced-repetition:复习卡片": false,
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false,
+      "markdown-importer:打开 Markdown 格式转换器": false
+    }
+  },
+  "active": "a77a8e302b36a9f9",
+  "lastOpenFiles": [
+    "想法/未命名.md",
+    "想法/未命名.md.nssyncsc",
+    "项目设计/images/Pasted image 20230802114210.png",
+    "项目设计/images/Pasted image 20230802114202.png",
+    "项目设计/多数据源索引同步设计.md",
+    "技术/mysql/分库分表/分库分表.md",
+    "技术/mysql/分库分表",
+    "技术/mysql/上亿数据怎么玩深度分页？兼容MySQL + ES + MongoDB.md",
+    "项目设计/openim.md",
+    "日志/2023-08-02_星期三.md",
+    "项目设计/images/Pasted image 20230731163500.png",
+    "项目设计/images/Pasted image 20230731163447.png",
+    "项目设计/images/Pasted image 20230731162748.png",
+    "项目设计/images/Pasted image 20230731162540.png",
+    "项目设计/images/Pasted image 20230731162303.png",
+    "想法/shopee.md",
+    "日志/2023-07-31_星期一.md",
+    "技术/延时队列/使用时间轮算法实现延迟队列 (二)（Golang）.md",
+    "项目设计/Feed 流系统实战.md",
+    "技术/高级数据结构/红黑树.md",
+    "想法/some qu.md",
+    "项目设计/华宇讯电商和运营系统/限流模式.md",
+    "项目设计/images/Pasted image 20230728132407.png",
+    "项目设计/华宇讯电商和运营系统/限流做法.md",
+    "项目设计/B站千亿级点赞系统服务架构设计.md",
+    "项目设计/秒杀/秒杀系统设计.md",
+    "技术/mysql/大数据量下的分页查询优化.md",
+    "日志/2023-07-28_星期五.md",
+    "日志/2023-07-26_星期三.md",
+    "想法/other qu.md",
+    "网络/加解密.md",
+    "项目设计/内存只有 2G，如何对 100 亿数据进行排序.md",
+    "网络/HTTP2 是如何建立连接的.md",
+    "技术/网络/线上大量CLOSE_WAIT原因深入分析.md",
+    "网络/键入网址到网页显示，期间发生了什么.md",
+    "网络/网络层面优化.md",
+    "技术/分布式话题/images/Pasted image 20230726144914.png",
+    "技术/分布式话题/images/Pasted image 20230726144906.png",
+    "技术/分布式话题/images",
+    "技术/分布式话题",
+    "想法/shopee.md.nssyncsc",
+    "日志/2023-07-18_星期二.md.nssyncsc",
+    "想法/other qu2.md.nssyncsc",
+    "技术/redis/redis原理/PubSub.md.nssyncsc",
+    "技术/redis/redis原理/images/Pasted image 20230629142500.png.nssyncsc",
+    "技术/redis/redis原理/images/Pasted image 20230629142431.png.nssyncsc"
+  ]
+}

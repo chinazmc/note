@@ -1,0 +1,17 @@
+#k8s 
+
+归根结底，Kubernetes Node（kubelet）的主要功能就是启动和停止容器的组件，我们称之为容器运行时（Container Runtime），其中最知名的就是Docker了。为了更具扩展性，Kubernetes从1.5版本开始就加入了容器运行时插件API，即Container Runtime Interface，简称CRI。
+
+CRI包含ProtocolBuffers、gRPC API、运行库支持及开发中的标准规范和工具。
+
+kubelet使用gRPC框架通过UNIX Socket与容器运行时（或CRI代理）进行通信。在这个过程中kubelet是客户端，CRI代理（shim）是服务端，如图2.3所示。
+![[Pasted image 20220530180208.png]]
+
+Protocol Buffers API包含两个gRPC服务：ImageService和RuntimeService。ImageService提供了从仓库拉取镜像、查看和移除镜像的功能。RuntimeService负责Pod和容器的生命周期管理，以及与容器的交互（exec/attach/port-forward）。rkt和Docker这样的容器运行时可以使用一个Socket同时提供两个服务，在kubelet中可以用--container-runtime-endpoint和--image-service-endpoint参数设置这个Socket。
+
+Pod由一组应用容器组成，其中包含共有的环境和资源约束。在CRI里，这个环境被称为PodSandbox。Kubernetes有意为容器运行时留下一些发挥空间，它们可以根据自己的内部实现来解释PodSandbox。对于Hypervisor类的运行时，PodSandbox会具体化为一个虚拟机。其他例如Docker，会是一个Linux命名空间。在v1alpha1 API中，kubelet会创建Pod级别的cgroup传递给容器运行时，并以此运行所有进程来满足PodSandbox对Pod的资源保障。
+
+在启动Pod之前，kubelet调用RuntimeService.RunPodSandbox来创建环境。这一过程包括为Pod设置网络资源（分配IP等操作）。PodSandbox被激活之后，就可以独立地创建、启动、停止和删除不同的容器了。kubelet会在停止和删除PodSandbox之前首先停止和删除其中的容器。
+
+kubelet的职责在于通过RPC管理容器的生命周期，实现容器生命周期的钩子，存活和健康监测，以及执行Pod的重启策略等。RuntimeService服务包括对Sandbox和Container操作的方法.
+
