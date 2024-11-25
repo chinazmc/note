@@ -4,39 +4,24 @@
     "type": "split",
     "children": [
       {
-        "id": "f7f7fab198233eca",
+        "id": "b21dfb167388619a",
         "type": "tabs",
         "children": [
           {
-            "id": "d91f8031c36d85af",
+            "id": "e862492ea7be200b",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "技术/dbms/starrocks/三大数据模型：星型模型、雪花模型、星座模型.md",
+                "file": "技术/dbms/starrocks/QPS 提升 10 倍！滴滴借助 StarRocks 物化视图实现低成本精确去重.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "三大数据模型：星型模型、雪花模型、星座模型"
-            }
-          },
-          {
-            "id": "ee706823b0c4be6c",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "日志/2024-11-24_星期日.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "2024-11-24_星期日"
+              "title": "QPS 提升 10 倍！滴滴借助 StarRocks 物化视图实现低成本精确去重"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -92,7 +77,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 328.5
+    "width": 379.5
   },
   "right": {
     "id": "a4dd56a9bcb803f7",
@@ -152,8 +137,8 @@
             "state": {
               "type": "calendar",
               "state": {},
-              "icon": "calendar-with-checkmark",
-              "title": "Calendar"
+              "icon": "lucide-file",
+              "title": "插件不再活动"
             }
           },
           {
@@ -162,8 +147,8 @@
             "state": {
               "type": "review-queue-list-view",
               "state": {},
-              "icon": "SpacedRepIcon",
-              "title": "笔记复习序列"
+              "icon": "lucide-file",
+              "title": "插件不再活动"
             }
           },
           {
@@ -179,9 +164,19 @@
               "icon": "lucide-archive",
               "title": "添加笔记属性"
             }
+          },
+          {
+            "id": "6b44aa2a95d1806f",
+            "type": "leaf",
+            "state": {
+              "type": "review-queue-list-view",
+              "state": {},
+              "icon": "SpacedRepIcon",
+              "title": "笔记复习序列"
+            }
           }
         ],
-        "currentTab": 3
+        "currentTab": 6
       }
     ],
     "direction": "horizontal",
@@ -191,27 +186,41 @@
   "left-ribbon": {
     "hiddenItems": {
       "canvas:新建白板": false,
-      "obsidian-spaced-repetition:复习卡片": false,
       "switcher:打开快速切换": false,
       "graph:查看关系图谱": false,
       "daily-notes:打开/创建今天的日记": false,
       "templates:插入模板": false,
       "command-palette:打开命令面板": false,
-      "markdown-importer:打开 Markdown 格式转换器": false
+      "markdown-importer:打开 Markdown 格式转换器": false,
+      "obsidian-spaced-repetition:复习卡片": false
     }
   },
-  "active": "ee706823b0c4be6c",
+  "active": "e862492ea7be200b",
   "lastOpenFiles": [
-    "想法/只言片语二.md",
-    "想法/一些想法.md",
+    "技术/dbms/starrocks/dmlt sr实践.md",
     "技术/dbms/starrocks/性能指标提升50%+，携程数据报表平台查询效率治理实践.md",
-    "技术/dbms/starrocks/携程酒店实时数仓架构和案例.md",
-    "日志/2024-11-24_星期日.md",
     "技术/dbms/starrocks/资源隔离原理解析.md",
+    "技术/dbms/starrocks/携程酒店实时数仓架构和案例.md",
+    "技术/dbms/starrocks/QPS 提升 10 倍！滴滴借助 StarRocks 物化视图实现低成本精确去重.md",
+    "second markdown.md",
+    "first markdown.md",
+    "整数好处理.md",
+    "5.md",
+    "技术/mysql/mysql死锁排查/死锁案例.md",
     "技术/dbms/starrocks/三大数据模型：星型模型、雪花模型、星座模型.md",
     "技术/dbms/starrocks/StarRocks 技术内幕：实时更新与极速查询如何兼得.md",
-    "技术/dbms/starrocks/images/Pasted image 20241123114520.png",
     "技术/dbms/starrocks/StarRocks 技术内幕：查询原理浅析.md",
+    "未命名.canvas",
+    "未命名 1.canvas",
+    "未命名 2.canvas",
+    "未命名 3.canvas",
+    "日志/2023-06-25_星期日.md",
+    "日志/2023-06-22_星期四.md",
+    "日志/2024-11-25_星期一.md",
+    "日志/2024-11-24_星期日.md",
+    "想法/只言片语二.md",
+    "想法/一些想法.md",
+    "技术/dbms/starrocks/images/Pasted image 20241123114520.png",
     "技术/dbms/starrocks/images/Pasted image 20241123113957.png",
     "技术/dbms/starrocks/images/Pasted image 20241123113941.png",
     "技术/dbms/starrocks/images/Pasted image 20241123113922.png",
@@ -230,10 +239,6 @@
     "日志/2024-10-26_星期六.md",
     "大模型/大模型RAG企业项目实战.md",
     "日志/2024-10-13_星期日.md",
-    "大模型/未命名 1.md",
-    "日志/2024-10-10_星期四.md",
-    "日志/2024-10-08_星期二.md",
-    "日志/2024-09-24_星期二.md",
     "技术/大数据/starrocks/images/Pasted image 20241027141505.png.nssyncsc",
     "技术/大数据/starrocks/images/Pasted image 20241027140941.png.nssyncsc",
     "技术/大数据/starrocks/images/Pasted image 20241027104713.png.nssyncsc",
@@ -241,13 +246,6 @@
     "技术/大数据/starrocks/未命名.md.nssyncsc",
     "技术/大数据/starrocks/images",
     "技术/大数据/starrocks/000_坚果云闪电下载介绍.html.nssyncsc",
-    "技术/大数据/starrocks",
-    "日志/2024-09-22_星期日.md",
-    "2024新的规划/未命名.md",
-    "日志/2024-09-21_星期六.md",
-    "未命名.canvas",
-    "想法/有趣的问题.md",
-    "技术/网络/线上大量CLOSE_WAIT原因深入分析.md",
-    "想法/shopee.md"
+    "技术/大数据/starrocks"
   ]
 }
