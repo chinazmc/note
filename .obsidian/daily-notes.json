@@ -1,6 +1,0 @@
-{
-  "format": "YYYY-MM-DD_dddd",
-  "folder": "日志",
-  "autorun": true,
-  "template": "Templates/日志模板"
-}
